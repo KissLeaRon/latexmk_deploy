@@ -14,22 +14,15 @@ echo "<!DOCTYPE HTML>
     <h1>$GITHUB_REPOSITORY</h1>
     <ul>" > $OUT_DIR/index.html
 
-for directory in */; do
-
-    if [ "$directory" == "build/" ]; then
-        continue
-    fi
-
-    echo "Building $directory"
-    cd $directory
-    mkdir -p $OUT_DIR/$directory
-    latexmk -pdf -output-directory=$OUT_DIR/$directory
-    # Remove every output that isn't a PDF
-    find $OUT_DIR/$directory -type f ! -name "*.pdf" -exec rm {} \;
-    FILENAME=$(find $OUT_DIR/$directory -type f -name "*.pdf")
-    FILENAME=$(basename "$FILENAME")
-    echo "        <li><a href=\"$directory$FILENAME\">$directory$FILENAME</a></li>" >> $OUT_DIR/index.html
-done
+echo "Building $directory"
+cd $directory
+mkdir -p $OUT_DIR/$directory
+latexmk -pdf -output-directory=$OUT_DIR/$directory
+# Remove every output that isn't a PDF
+find $OUT_DIR/$directory -type f ! -name "*.pdf" -exec rm {} \;
+FILENAME=$(find $OUT_DIR/$directory -type f -name "*.pdf")
+FILENAME=$(basename "$FILENAME")
+echo "        <li><a href=\"$FILENAME\">$FILENAME</a></li>" >> $OUT_DIR/index.html
 
 echo "    </ul>
 </body>

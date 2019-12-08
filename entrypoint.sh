@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/ash
 REPO_ROOT="$(pwd)"
 OUT_DIR="$(pwd)/build"
 

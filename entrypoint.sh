@@ -1,7 +1,7 @@
-#!/bin/bash
+#!/bin/ash
 REPO_ROOT="$(pwd)"
 OUT_DIR="$(pwd)/build"
-#directory="tex"
+directory="tex"
 
 mkdir -p $OUT_DIR
 

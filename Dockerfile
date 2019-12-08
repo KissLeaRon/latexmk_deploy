@@ -1,6 +1,6 @@
 # Container image that runs your code
-FROM aergus/latex:latest
-#FROM paperist/alpine-texlive-ja
+#FROM aergus/latex:latest
+FROM paperist/alpine-texlive-ja
 
 
 # Copies your code file from your action repository to the filesystem path `/` of the container

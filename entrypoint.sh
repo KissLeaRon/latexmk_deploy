@@ -43,8 +43,6 @@ for directory in */; do
     #    cp "$REPO_DIR/$directory/$artifact" "$DEPLOY_DIR/$directory/$artifact"
     #    echo "        <li><a href=\"$directory$artifact\">$directory$artifact</a></li>" >> $DEPLOY_DIR/index.html
     echo "        <li><a href=\"$directory$ARTIFACTS\">$directory$ARTIFACTS</a></li>" >> $DEPLOY_DIR/index.html
-    done
-    
 done
 
 echo "    </ul>

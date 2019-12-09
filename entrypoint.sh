@@ -31,7 +31,9 @@ for directory in */; do
     #ARTIFACTS=$(make | grep "$ARTIFACT_PREFIX")
     #ARTIFACTS=${ARTIFACTS#"$ARTIFACT_PREFIX"}
 
-    latexmk -output-directory=$DEPLOY_DIR/$directory
+    latexmk
+    ARTIFACT=$(find . -type f -name "*.pdf")
+    mv $ARTIFACT $DEPLOY_DIR/$directory
     # Remove every output that isn't a PDF
     #find $REPO_DIR/$directory -type f ! -name "*.pdf" -exec rm {} \;
     ARTIFACTS=$(find $DEPLOY_DIR/$directory -type f -name "*.pdf")

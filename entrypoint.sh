@@ -1,6 +1,6 @@
 #!/bin/ash
-REPO_DIR="$(pwd)"
-DEPLOY_DIR="$REPO_DIR/build"
+REPO_DIR="$(pwd)"            #/github/workspace
+DEPLOY_DIR="$REPO_DIR/build" #/github/workspace/build
 ARTIFACT_PREFIX="ARTIFACTS:"
 
 echo "Creating deploy directory: $DEPLOY_DIR"
@@ -31,17 +31,18 @@ for directory in */; do
     #ARTIFACTS=$(make | grep "$ARTIFACT_PREFIX")
     #ARTIFACTS=${ARTIFACTS#"$ARTIFACT_PREFIX"}
 
-    latexmk -output-directory=$OUT_DIR/$directory
+    latexmk -output-directory=$DEPLOY_DIR/$directory
     # Remove every output that isn't a PDF
     find $REPO_DIR/$directory -type f ! -name "*.pdf" -exec rm {} \;
     ARTIFACTS=$(find $REPO_DIR/$directory -type f -name "*.pdf")
     ARTIFACTS=$(basename "$ARTIFACTS")
     echo "Build artifacts: $ARTIFACTS"
 
-    for artifact in $(echo $ARTIFACTS | sed "s/,/ /g"); do
-        mkdir -p $(dirname "$DEPLOY_DIR/$directory/$artifact")
-        cp "$REPO_DIR/$directory/$artifact" "$DEPLOY_DIR/$directory/$artifact"
-        echo "        <li><a href=\"$directory$artifact\">$directory$artifact</a></li>" >> $DEPLOY_DIR/index.html
+    #for artifact in $(echo $ARTIFACTS | sed "s/,/ /g"); do
+    #    mkdir -p $(dirname "$DEPLOY_DIR/$directory/$artifact")
+    #    cp "$REPO_DIR/$directory/$artifact" "$DEPLOY_DIR/$directory/$artifact"
+    #    echo "        <li><a href=\"$directory$artifact\">$directory$artifact</a></li>" >> $DEPLOY_DIR/index.html
+    echo "        <li><a href=\"$directory$ARTIFACTS\">$directory$ARTIFACTS</a></li>" >> $DEPLOY_DIR/index.html
     done
     
 done

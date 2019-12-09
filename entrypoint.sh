@@ -27,14 +27,14 @@ for directory in */; do
     echo "Building $directory"
     cd $REPO_DIR/$directory
     pwd
-    mkdir -p $REPO_DIR/$directory
+    mkdir -p $DEPLOY_DIR/$directory
     #ARTIFACTS=$(make | grep "$ARTIFACT_PREFIX")
     #ARTIFACTS=${ARTIFACTS#"$ARTIFACT_PREFIX"}
 
     latexmk -output-directory=$DEPLOY_DIR/$directory
     # Remove every output that isn't a PDF
-    find $REPO_DIR/$directory -type f ! -name "*.pdf" -exec rm {} \;
-    ARTIFACTS=$(find $REPO_DIR/$directory -type f -name "*.pdf")
+    #find $REPO_DIR/$directory -type f ! -name "*.pdf" -exec rm {} \;
+    ARTIFACTS=$(find $DEPLOY_DIR/$directory -type f -name "*.pdf")
     ARTIFACTS=$(basename "$ARTIFACTS")
     echo "Build artifacts: $ARTIFACTS"
 
